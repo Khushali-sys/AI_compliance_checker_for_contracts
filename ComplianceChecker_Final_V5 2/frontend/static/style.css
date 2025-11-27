@@ -1,0 +1,306 @@
+/* ===================================================================
+   FINAL MASTER STYLE.CSS (Version 2 — Full Beautified UI)
+   Glassmorphism + Glow + Smooth Animations + Risk Color Logic
+   Compatible with index.html + app.js (single-page)
+=================================================================== */
+
+/* --------------------------------------------------------------
+   ROOT VARIABLES
+-------------------------------------------------------------- */
+:root {
+  --accent: #ff66b3;
+  --accent-light: #ff99cc;
+  --accent-hover: #ff4da6;
+
+  --glass-bg: rgba(255, 255, 255, 0.35);
+  --glass-border: rgba(255, 255, 255, 0.45);
+
+  --text-main: #111;
+  --text-muted: #666;
+
+  --risk-low: #d1ffe4;
+  --risk-medium: #fff5c4;
+  --risk-high: #ffd6de;
+
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --card-border: rgba(255, 255, 255, 0.65);
+}
+
+/* --------------------------------------------------------------
+   GLOBAL RESET
+-------------------------------------------------------------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  scroll-behavior: smooth;
+  background: linear-gradient(to bottom right, #ffeef7, #ffe5f0);
+  color: var(--text-main);
+}
+
+/* Smooth Fade Up */
+.animate-section {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.6s ease-out forwards;
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------
+   NAVBAR
+-------------------------------------------------------------- */
+.glass-header {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.4);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: 0.3s;
+}
+
+.glass-header:hover {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.nav-btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: 0.25s ease;
+}
+
+.nav-btn:hover {
+  background: var(--accent-light);
+  color: white;
+  box-shadow: 0 0 14px rgba(255, 102, 179, 0.45);
+}
+
+.nav-btn.active {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 0 18px rgba(255, 102, 179, 0.6);
+}
+
+/* Refresh button */
+.btn-refresh {
+  padding: 6px 16px;
+  background: var(--accent-light);
+  border-radius: 30px;
+  color: #fff;
+  transition: 0.25s;
+}
+.btn-refresh:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 0 16px rgba(255, 102, 179, 0.55);
+}
+
+/* --------------------------------------------------------------
+   GLASS PANELS
+-------------------------------------------------------------- */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.35);
+  transition: 0.3s ease;
+}
+
+.glass-panel:hover {
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------
+   UPLOAD BOX
+-------------------------------------------------------------- */
+.upload-box {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  padding: 10px;
+  border-radius: 12px;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.upload-box:hover {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 16px rgba(255, 102, 179, 0.35);
+}
+
+/* --------------------------------------------------------------
+   BUTTONS
+-------------------------------------------------------------- */
+.btn-analyze {
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--accent);
+  font-weight: 600;
+  color: #fff;
+  transition: 0.25s ease-in-out;
+}
+
+.btn-analyze:hover {
+  box-shadow: 0 0 22px rgba(255, 102, 179, 0.8);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-primary {
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  transition: 0.25s;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 0 18px rgba(255, 102, 179, 0.5);
+}
+
+.glass-btn {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  padding: 10px 15px;
+  border-radius: 12px;
+  transition: 0.25s ease;
+}
+.glass-btn:hover {
+  background: var(--accent-light);
+  color: white;
+  box-shadow: 0 0 14px rgba(255, 102, 179, 0.45);
+}
+
+/* --------------------------------------------------------------
+   RISK PANEL COLOR (dynamic block)
+-------------------------------------------------------------- */
+#analysisPanel.low-risk {
+  background: var(--risk-low);
+}
+
+#analysisPanel.medium-risk {
+  background: var(--risk-medium);
+}
+
+#analysisPanel.high-risk {
+  background: var(--risk-high);
+}
+
+#analysisPanel {
+  transition: background 0.4s ease;
+}
+
+/* --------------------------------------------------------------
+   STAT CARDS
+-------------------------------------------------------------- */
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 12px;
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 102, 179, 0.3);
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------
+   TABLES
+-------------------------------------------------------------- */
+table th {
+  background: rgba(255, 255, 255, 0.45);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+tbody tr {
+  transition: 0.2s;
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* --------------------------------------------------------------
+   MODAL
+-------------------------------------------------------------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 80;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  max-width: 520px;
+  width: 92%;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 22px rgba(255, 102, 179, 0.35);
+  animation: pop 0.35s ease-out;
+}
+
+@keyframes pop {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* --------------------------------------------------------------
+   PAGE SECTIONS
+-------------------------------------------------------------- */
+.page-section {
+  display: none;
+}
+
+.page-section.block {
+  display: block;
+}
+
+/* --------------------------------------------------------------
+   LISTS
+-------------------------------------------------------------- */
+#missingList li {
+  color: #ff3366;
+  font-size: 14px;
+  padding: 2px 0;
+}
+
+#presentList li {
+  color: #00994d;
+  font-size: 14px;
+  padding: 2px 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 102, 179, 0.45);
+  border-radius: 10px;
+}

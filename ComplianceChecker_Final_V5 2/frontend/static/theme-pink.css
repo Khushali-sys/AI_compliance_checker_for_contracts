@@ -1,0 +1,182 @@
+/* ==========================================================
+   THEME — Pink Glass Morphism
+========================================================== */
+
+:root {
+
+  /* PRIMARY BRAND COLORS */
+  --accent: #ff66b3;
+  --accent-light: #ff99cc;
+  --accent-hover: #ff4da6;
+
+  /* TEXT COLORS */
+  --text-main: #1a1a1a;
+  --text-light: #333;
+  --text-muted: #6a6a6a;
+
+  /* GLASS EFFECT */
+  --glass-bg: rgba(255, 255, 255, 0.38);
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --glass-shadow: rgba(255, 255, 255, 0.45);
+
+  /* PAGE BACKGROUND */
+  --page-bg-start: #ffffff;
+  --page-bg-end: #ffe5f2;
+
+  /* BLOCK RISK COLORS */
+  --risk-low: #d9fff0;
+  --risk-medium: #fff7d1;
+  --risk-high: #ffd6de;
+
+  /* SPECIAL ELEMENT COLORS */
+  --btn-text: #ffffff;
+  --upload-bg: rgba(255, 255, 255, 0.55);
+
+  /* SHADOWS */
+  --shadow-soft: 0 0 16px rgba(255, 255, 255, 0.32);
+  --shadow-strong: 0 0 28px rgba(255, 102, 179, 0.45);
+}
+
+/* ==========================================================
+   BODY BACKGROUND (Smooth Gradient)
+========================================================== */
+
+body {
+  background: var(--bg-low);   /* DEFAULT */
+  transition: background 0.4s ease-out;
+}
+
+
+/* ==========================================================
+   GLASS PANEL DEFAULT LOOK
+========================================================== */
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+/* ==========================================================
+   NAVIGATION BUTTONS
+========================================================== */
+
+.nav-btn {
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  transition: 0.25s ease-in-out;
+}
+
+.nav-btn:hover {
+  background: var(--accent-light);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(255, 102, 179, 0.55);
+}
+
+.nav-btn.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 102, 179, 0.6);
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.btn-primary, .btn-analyze {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(255, 102, 179, 0.35);
+  transition: 0.25s ease;
+}
+
+.btn-primary:hover,
+.btn-analyze:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 0 22px rgba(255, 102, 179, 0.85);
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* ==========================================================
+   GLASS BUTTONS
+========================================================== */
+
+.glass-btn {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  transition: 0.25s ease;
+}
+
+.glass-btn:hover {
+  background: var(--accent-light);
+  color: #fff;
+  box-shadow: var(--shadow-strong);
+}
+
+/* ==========================================================
+   UPLOAD INPUT
+========================================================== */
+
+.upload-input {
+  background: var(--upload-bg);
+  color: var(--text-main);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 8px 10px;
+}
+
+.upload-input:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+/* ==========================================================
+   STAT CARDS
+========================================================== */
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.50);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+}
+
+/* ==========================================================
+   TABLE HEADERS
+========================================================== */
+
+table th {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ==========================================================
+   EMAIL MODAL
+========================================================== */
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 20px rgba(255, 102, 179, 0.28);
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-light);
+  border-radius: 10px;
+}

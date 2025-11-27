@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>AI Compliance Checker</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Lottie -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="static/style.css">
+  <link rel="stylesheet" href="static/theme-pink.css">
+</head>
+
+<body class="text-[#111] bg-gradient-to-br from-[#ffeef5] to-[#ffe5f0]">
+
+  <!-- NAVBAR -->
+  <header class="glass-header px-8 py-4 flex justify-between items-center">
+    <div class="font-semibold text-xl flex items-center gap-2">
+      <img src="static/icons/shield.svg" class="w-6 opacity-80" />
+      <span>AI Compliance Checker</span>
+    </div>
+
+    <nav class="space-x-3 flex items-center">
+      <button id="navAnalyzer" class="nav-btn active">Analyzer</button>
+      <button id="navDashboard" class="nav-btn">Dashboard</button>
+      <button id="refreshBtn" class="btn-refresh">Refresh</button>
+    </nav>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="max-w-7xl mx-auto mt-10 pb-20 px-6">
+
+    <!-- PAGE: ANALYZER -->
+    <section id="pageAnalyzer" class="page-section block">
+
+      <div class="grid grid-cols-12 gap-6">
+
+        <!-- LEFT: UPLOAD -->
+        <div class="col-span-4 glass-panel p-6 animate-section">
+
+          <h2 class="text-lg font-semibold mb-1">Upload Contract</h2>
+          <p class="text-sm text-gray-500 mb-4">Supported: PDF, DOCX, TXT</p>
+
+          <input id="fileInput" type="file" class="upload-box" accept=".pdf,.docx,.txt" />
+
+          <div class="flex gap-3 mt-4">
+            <button id="analyzeBtn" class="btn-analyze flex-1">Analyze</button>
+            <button id="downloadReportBtn" class="glass-btn">PDF</button>
+          </div>
+
+          <!-- ANALYSIS RESULT -->
+          <div id="analysisPanel" class="glass-panel p-5 mt-6 hidden">
+
+            <h3 class="text-lg font-semibold mb-4">Analysis Result</h3>
+
+            <div class="flex items-center gap-6">
+              <div id="riskArc" class="w-[120px] h-[120px]"></div>
+
+              <div>
+                <p class="text-xs">Risk Level</p>
+                <p id="riskLabel" class="text-xl font-bold text-accent">—</p>
+
+                <p class="text-xs mt-2">Score</p>
+                <p id="riskScore" class="text-2xl font-bold text-accent">0</p>
+              </div>
+            </div>
+
+            <p id="summaryArea" class="text-sm text-gray-600 mt-4"></p>
+
+            <h4 class="font-semibold mt-4">Missing Clauses</h4>
+            <ul id="missingList" class="list-disc ml-6 text-red-500"></ul>
+
+            <h4 class="font-semibold mt-4">Detected Clauses</h4>
+            <ul id="presentList" class="list-disc ml-6 text-green-600"></ul>
+
+            <h4 class="font-semibold mt-4">Clause Details</h4>
+            <div id="detailsBox" class="text-sm mt-2"></div>
+
+            <div class="flex gap-3 mt-4">
+              <button id="applyBtn" class="btn-primary flex-1">Apply Missing Clauses</button>
+              <button id="previewEmailBtn" class="glass-btn">📩 Email Preview</button>
+            </div>
+
+            <div id="results" class="mt-6"></div>
+          </div>
+        </div>
+
+        <!-- RIGHT SIDE PLACEHOLDER -->
+        <div class="col-span-8"></div>
+      </div>
+    </section>
+
+    <!-- PAGE: DASHBOARD -->
+    <section id="pageDashboard" class="page-section hidden">
+
+      <div class="grid grid-cols-12 gap-6">
+
+        <!-- CHARTS -->
+        <div class="col-span-8 glass-panel p-6 animate-section">
+          <h3 class="font-semibold mb-4">Risk Trends</h3>
+          <canvas id="riskChart" height="140"></canvas>
+          <div class="h-8"></div>
+          <canvas id="missingChart" height="140"></canvas>
+        </div>
+
+        <!-- METRICS + HISTORY -->
+        <aside class="col-span-4 glass-panel p-6 animate-section">
+
+          <h3 class="font-semibold">Dashboard Metrics</h3>
+
+          <div class="mt-4 space-y-3">
+            <div class="stat-card">
+              <div class="text-xs text-gray-500">Total Documents</div>
+              <div id="totalDocs" class="stat-value">0</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="text-xs text-gray-500">Average Risk</div>
+              <div id="avgRisk" class="stat-value">0</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="text-xs text-gray-500">Highest Risk File</div>
+              <div id="maxRiskFile" class="stat-value text-accent"></div>
+            </div>
+          </div>
+
+          <h4 class="font-semibold mt-6 mb-2">History Table</h4>
+
+          <div class="overflow-auto max-h-[320px] rounded-md border border-white/20">
+            <table class="w-full text-sm">
+              <thead class="bg-white/20 text-gray-600">
+                <tr>
+                  <th class="p-2 text-left">File</th>
+                  <th class="p-2 text-right">Risk</th>
+                  <th class="p-2 text-right">Missing</th>
+                  <th class="p-2 text-right">Time</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody"></tbody>
+            </table>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- EMAIL MODAL -->
+  <div id="emailModal" class="modal hidden">
+    <div class="modal-content glass-panel p-6">
+      <h3 class="text-lg font-semibold mb-3">Email Preview</h3>
+      <pre id="emailContent" class="bg-white/40 text-sm p-3 rounded-md whitespace-pre-wrap"></pre>
+      <div class="flex justify-end mt-4">
+        <button id="closeEmailModal" class="glass-btn px-4 py-1">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN JS -->
+  <script src="static/app.js"></script>
+</body>
+
+</html>
